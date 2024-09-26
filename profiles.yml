@@ -5,7 +5,8 @@ dbt_demo:
       schema: dbt
       threads: 1
       type: databricks
+      method: http
       host: "{{ env_var('DBT_HOST') }}"
-      http_path: "/sql/1.0/warehouses/{{ env_var('DBT_CLUSTER_ID') }}"
+      http_path: "sql/protocolv1/o/{{ env_var('DBT_ORG_ID') }}/{{ env_var('DBT_CLUSTER_ID') }}"
       token: "{{ env_var('DBT_ACCESS_TOKEN') }}"
   target: dev
