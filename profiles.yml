@@ -3,10 +3,11 @@ dbt_demo:
     dev:
       catalog: marcin_demo
       schema: dbt
-      threads: 1
+      threads: 8
       type: databricks
-      method: http
       host: "{{ env_var('DBT_HOST') }}"
-      http_path: "sql/protocolv1/o/{{ env_var('DBT_ORG_ID') }}/{{ env_var('DBT_CLUSTER_ID') }}"
+      http_path: /sql/1.0/warehouses/475b94ddc7cd5211
+      # very slow
+      #http_path: "sql/protocolv1/o/{{ env_var('DBT_ORG_ID') }}/{{ env_var('DBT_CLUSTER_ID') }}"
       token: "{{ env_var('DBT_ACCESS_TOKEN') }}"
   target: dev
