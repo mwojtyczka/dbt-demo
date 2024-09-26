@@ -7,5 +7,5 @@ dbt_demo:
       type: databricks
       host: e2-demo-field-eng.cloud.databricks.com
       http_path: /sql/1.0/warehouses/475b94ddc7cd5211
-      token: {{ env_var('DBT_ACCESS_TOKEN') }}
+      token: "{{ env_var('DBT_ACCESS_TOKEN') }}"
   target: dev
