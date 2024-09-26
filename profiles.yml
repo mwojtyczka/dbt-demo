@@ -1,0 +1,7 @@
+dbt_demo:
+  outputs:
+    dev:
+      catalog: marcin_demo
+      schema: dbt
+      type: databricks
+  target: dev
