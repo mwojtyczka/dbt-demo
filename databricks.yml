@@ -1,0 +1,33 @@
+# This is a Databricks asset bundle definition for marcin_project.
+# See https://docs.databricks.com/dev-tools/bundles/index.html for documentation.
+bundle:
+  name: dbt_demo
+
+include:
+  - resources/*.yml
+
+targets:
+  # The 'dev' target, for development purposes. This target is the default.
+  dev:
+    # We use 'mode: development' to indicate this is a personal development copy:
+    # - Deployed resources get prefixed with '[dev my_user_name]'
+    # - Any job schedules and triggers are paused by default
+    # - The 'development' mode is used for Delta Live Tables pipelines
+    mode: development
+    default: true
+    workspace:
+      host: https://e2-demo-field-eng.cloud.databricks.com/
+
+  # The 'prod' target, used for production deployment.
+  prod:
+    # We use 'mode: production' to indicate this is a production deployment.
+    # Doing so enables strict verification of the settings below.
+    mode: production
+    workspace:
+      host: <worksapce_url>
+      # We only have a single deployment copy for production, so we use a shared path.
+      root_path: /Shared/.bundle/prod/${bundle.name}
+    # default user to use for all jobs in this environment
+    run_as:
+      user_name: user@mail.com
+      #service_principal_name: "69511ed2-zb27-444c-9863-4bc8ff497637"
