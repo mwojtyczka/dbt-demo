@@ -1,15 +1,36 @@
-Welcome to your new dbt project!
+Welcome to my dbt demo project!
 
-### Using the starter project
+## Run the dbt project from local machine
 
-Try running the following commands:
-- dbt run
-- dbt test
+Execute all sql models/scripts in Databricks. 
+One can group models into folders and deploy them separately.
+```bash
+export DBT_ACCESS_TOKEN=<pat_token>
+export DBT_CLUSTER_ID=<cluster_id>
+export DBT_HOST=<workspace_url>
+dbt run
+```
 
+## Deploy dbt project as Databricks Job
 
-### Resources:
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
-- Join the [chat](https://community.getdbt.com/) on Slack for live discussions and support
-- Find [dbt events](https://events.getdbt.com) near you
-- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+Run Databricks Assets Bundle (DAB) to deploy the project to Databricks job:
+```bash
+databricks configure  # optional step to configure pat token
+databricks bundle deploy --target dev
+```
+
+This will run all project sql scripts. One can also create separate jobs to run group of sql scripts/models.
+
+The job will get deployed to the workspace specified in the `databricks.yml` file. 
+The definition of the job can be found under `resources/dbt_sql_job.yml`.
+
+There are 2 types of clusters used in the job:
+1. SQL Warehouse - cluster used to execute the dbt model
+2. dbt CLI compute - cluster used to execute the dbt cli commands
+
+## Resources
+
+* Databricks Assets Bundle: https://docs.databricks.com/en/dev-tools/bundles/index.html
+* DBT integration with Databricks: https://docs.databricks.com/en/partners/prep/dbt.html
+* How to setup dbt job in Databricks: https://docs.databricks.com/en/jobs/how-to/use-dbt-in-workflows.html
+* Example assets bundle project for dbt: https://github.com/databricks/bundle-examples/tree/main/dbt_sql
