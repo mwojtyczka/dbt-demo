@@ -1,0 +1,48 @@
+version: 2
+
+models:
+  - name: zzz_game_details
+    columns:
+      - name: game_id
+        data_tests:
+          - unique
+          - not_null
+      - name: home
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ['Amsterdam', 'San Francisco', 'Seattle']
+      - name: visitor
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ['Amsterdam', 'San Francisco', 'Seattle']
+      - name: home_score
+        data_tests:
+          - not_null
+      - name: visitor_score
+        data_tests:
+          - not_null
+      - name: winner
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ['Amsterdam', 'San Francisco', 'Seattle']
+      - name: date
+        data_tests:
+          - not_null
+  - name: zzz_win_loss_records
+    columns:
+      - name: team
+        data_tests:
+          - unique
+          - not_null
+          - relationships:
+              to: ref('zzz_game_details')
+              field: home
+      - name: wins
+        data_tests:
+          - not_null
+      - name: losses
+        data_tests:
+          - not_null

@@ -2,7 +2,7 @@ dbt_demo:
   outputs:
     dev:
       catalog: marcin_demo
-      schema: dbt
+      schema: dbt_dev
       threads: 8
       type: databricks
       host: "{{ env_var('DBT_HOST') }}"

@@ -20,10 +20,11 @@ resources:
             # The default schema, catalog, etc. are defined in ./profiles.yml
             profiles_directory: .
             commands:
-            # The dbt commands to run (see also dbt_profiles/profiles.yml; dev_schema is used in the dev profile)
+            # The dbt commands to run (see also dbt_profiles/profiles.yml; dbt_dev schema is used in the dev profile)
             - 'dbt deps --target=${bundle.target}'
             - 'dbt seed --target=${bundle.target}'
             - 'dbt run --target=${bundle.target}'
+            - 'dbt test --target=${bundle.target}'
 
           libraries:
           - pypi:

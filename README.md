@@ -8,14 +8,20 @@ One can group models into folders and deploy them separately.
 export DBT_ACCESS_TOKEN=<pat_token>
 export DBT_CLUSTER_ID=<cluster_id>
 export DBT_HOST=<workspace_url>
+dbt compile
 dbt run
+dbt test
+
+# run for specific target and models
+dbt run --target dev --model src/models/demo
+dbt run --target dev --model --models zzz_game_details zzz_win_loss_records
 ```
 
 ## Deploy dbt project as Databricks Job
 
 Run Databricks Assets Bundle (DAB) to deploy the project to Databricks job:
 ```bash
-databricks configure  # optional step to configure pat token
+databricks auth login --host <workspace-url>  # optional step to configure pat token
 databricks bundle deploy --target dev
 ```
 
