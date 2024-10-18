@@ -34,3 +34,8 @@ models:
     # Config indicated by + and applies to all files under models/example/
     example:
       +materialized: view
+    python_example:
+      +tags: [ 'python' ]
+      +submission_method: all_purpose_cluster
+      +create_notebook: False
+      +cluster_id: 0709-132523-cnhxf2p6
