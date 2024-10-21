@@ -8,10 +8,13 @@ version: '1.0.0'
 # This setting configures which "profile" dbt uses for this project.
 profile: 'dbt_demo'
 
+vars:
+  surrogate_key_treat_nulls_as_empty_strings: True
+
 # These configurations specify where dbt should look for different types of files.
 # The `model-paths` config, for example, states that models in this project can be
 # found in the "models/" directory. You probably won't need to change these!
-model-paths: ["src/models"]
+model-paths: ["src/models", "example"]
 analysis-paths: ["src/analyses"]
 test-paths: ["tests"]
 seed-paths: ["src/seeds"]
@@ -39,3 +42,7 @@ models:
       +submission_method: all_purpose_cluster
       +create_notebook: False
       +cluster_id: 0709-132523-cnhxf2p6
+
+dispatch:
+  - macro_namespace: dbt_utils
+    search_order: ['dbt_project_evaluator', 'spark_utils', 'dbt_utils']
