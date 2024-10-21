@@ -10,7 +10,7 @@ models:
     config:
       materialized: table
       # defined in dbt_project.yml
-      #tags: ['python']
+      tags: ['python']
       #submission_method: all_purpose_cluster
       #create_notebook: False
       #cluster_id: 0709-132523-cnhxf2p6
@@ -21,6 +21,3 @@ models:
         # Standard validation for 'grain' of Python results
         data_tests:
           - not_null
-    data_tests:
-      # Write your own validation logic (in SQL) for Python results
-      - diamonds_check

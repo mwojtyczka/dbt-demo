@@ -14,7 +14,7 @@ vars:
 # These configurations specify where dbt should look for different types of files.
 # The `model-paths` config, for example, states that models in this project can be
 # found in the "models/" directory. You probably won't need to change these!
-model-paths: ["src/models", "example"]
+model-paths: ["src/models", "models2"]
 analysis-paths: ["src/analyses"]
 test-paths: ["tests"]
 seed-paths: ["src/seeds"]
