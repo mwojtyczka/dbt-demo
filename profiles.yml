@@ -1,13 +1,13 @@
 dbt_demo:
   outputs:
     dev:
-      catalog: marcin_demo
+      catalog: dbt_demo
       schema: dbt_dev
       threads: 8
       type: databricks
-      host: "{{ env_var('DBT_HOST') }}"
+      host: "{{ env_var('DBT_HOST') }}" # databricks workspace url taken from the environment variables
       http_path: /sql/1.0/warehouses/475b94ddc7cd5211
-      # very slow
+      # you can construct the path but the models execution is very slow using this method:
       #http_path: "sql/protocolv1/o/{{ env_var('DBT_ORG_ID') }}/{{ env_var('DBT_CLUSTER_ID') }}"
-      token: "{{ env_var('DBT_ACCESS_TOKEN') }}"
+      token: "{{ env_var('DBT_ACCESS_TOKEN') }}" # PAT token taken from environment variables
   target: dev

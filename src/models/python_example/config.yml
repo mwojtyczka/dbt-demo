@@ -9,11 +9,27 @@ models:
     # Configure in ways that feel intuitive and familiar
     config:
       materialized: table
-      # defined in dbt_project.yml
       tags: ['python']
+
+      # https://docs.getdbt.com/docs/build/python-models#specific-data-platforms
+      # run the python models on all purpose cluster
       #submission_method: all_purpose_cluster
       #create_notebook: False
       #cluster_id: 0709-132523-cnhxf2p6
+
+      # run the python models on job cluster
+      submission_method: job_cluster
+      job_cluster_config:
+        # https://docs.databricks.com/api/workspace/jobs/create#job_clusters-new_cluster
+        spark_version: 13.3.x-scala2.12
+        node_type_id: i3.xlarge
+        data_security_mode: SINGLE_USER
+        num_workers: 0
+        spark_conf:
+          spark.master: "local[*, 4]"
+          spark.databricks.cluster.profile: singleNode
+        custom_tags:
+          ResourceClass: SingleNode
 
     # Test the results of my Python transformation
     columns:

@@ -2,6 +2,8 @@ Welcome to my dbt demo project!
 
 ## Run the dbt project from local machine
 
+Execute `resources/input_data.sql` script first in Databricks.
+
 Execute all sql models/scripts in Databricks. 
 One can group models into folders and deploy them separately.
 ```bash
@@ -17,6 +19,24 @@ dbt run --target dev --model src/models/demo
 dbt run --target dev --model --models zzz_game_details zzz_win_loss_records
 ```
 
+## Ensure project best practices
+
+Run the following commands to run [dbt project evaluator](https://github.com/dbt-labs/dbt-project-evaluator):
+```
+dbt deps # install dbt packages defined in packages.yml
+dbt build --select package:dbt_project_evaluator
+```
+
+## Standardize SQL
+
+Run [SQL linter and formatter](https://sqlfluff.com/):
+```
+sqlfluff lint src/models/*/*.sql
+sqlfluff fix src/models/*/*.sql
+```
+
+More on dbt project best practices on Databricks here: https://www.databricks.com/blog/2022/12/15/best-practices-super-powering-your-dbt-project-databricks.html
+
 ## Deploy dbt project as Databricks Job
 
 Run Databricks Assets Bundle (DAB) to deploy the project to Databricks job:
@@ -30,7 +50,7 @@ This will run all project sql scripts. One can also create separate jobs to run 
 The job will get deployed to the workspace specified in the `databricks.yml` file. 
 The definition of the job can be found under `resources/dbt_sql_job.yml`.
 
-There are 2 types of clusters used in the job:
+There are 2 types of clusters used in Databricks dbt jobs:
 1. SQL Warehouse - cluster used to execute the dbt model
 2. dbt CLI compute - cluster used to execute the dbt cli commands
 

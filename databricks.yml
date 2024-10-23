@@ -6,6 +6,11 @@ bundle:
 include:
   - resources/*.yml
 
+# https://docs.databricks.com/en/dev-tools/bundles/variables.html
+variables:
+  dbt_project_dir:
+    description: project dir to use
+
 targets:
   # The 'dev' target, for development purposes. This target is the default.
   dev:
@@ -17,6 +22,8 @@ targets:
     default: true
     workspace:
       host: https://e2-demo-field-eng.cloud.databricks.com/
+    variables:
+      dbt_project_dir: /Users/marcin.wojtyczka@databricks.com/.bundle/dbt_demo/dev/files
 
   # The 'prod' target, used for production deployment.
   prod:
@@ -27,7 +34,10 @@ targets:
       host: <worksapce_url>
       # We only have a single deployment copy for production, so we use a shared path.
       root_path: /Shared/.bundle/prod/${bundle.name}
+
     # default user to use for all jobs in this environment
     run_as:
       user_name: user@mail.com
       #service_principal_name: "69511ed2-zb27-444c-9863-4bc8ff497637"
+    variables:
+      dbt_project_dir: /Shared/.bundle/prod/${bundle.name}/dbt_demo/dev/files

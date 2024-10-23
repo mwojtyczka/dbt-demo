@@ -1,10 +1,13 @@
-DROP SCHEMA IF EXISTS marcin_demo.dbt_dev CASCADE;
-CREATE SCHEMA marcin_demo.dbt_dev;
+-- run this before running dbt models
+CREATE CATALOG dbt_demo;
+
+--DROP SCHEMA IF EXISTS dbt_demo.dbt_dev CASCADE;
+CREATE SCHEMA dbt_demo.dbt_dev;
 
 DROP TABLE hive_metastore.default.diamonds;
 CREATE TABLE hive_metastore.default.diamonds USING CSV OPTIONS (path "/databricks-datasets/Rdatasets/data-001/csv/ggplot2/diamonds.csv", header "true");
 
-USE marcin_demo.dbt_dev;
+USE dbt_demo.dbt_dev;
 
 CREATE TABLE zzz_game_opponents (
 game_id INT,
