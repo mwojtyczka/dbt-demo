@@ -31,14 +31,17 @@ clean-targets: # directories to be removed by `dbt clean`
 # directory as views. These settings can be overridden in the individual model
 # files using the `{{ config(...) }}` macro.
 models:
+  # Config indicated by + and applies to all files under models/sql_model2/
   dbt_demo:
-    # Config indicated by + and applies to all files under models/sql_model2/
-    sql_model2:
-      +materialized: view
-
     # default cluster to use for running all python models
     # this can be overwritten by defining this for a specific model within the dbt_project.yml
     # or by specifying the config inside dedicated .yml file within the models/ directory or within the code.
+
+    # all-purpose cluster definition
+#    +submission_method: all_purpose_cluster
+#    +cluster_id: 0709-132523-cnhxf2p6
+
+    # job cluster definition
     +submission_method: job_cluster
     +job_cluster_config:
     # https://docs.databricks.com/api/workspace/jobs/create#job_clusters-new_cluster

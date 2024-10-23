@@ -20,10 +20,12 @@ export DBT_ACCESS_TOKEN=<pat_token>
 export DBT_CLUSTER_ID=<cluster_id>
 export DBT_HOST=<workspace_url>
 
-# compile, run and test all models
+# compile, run, test all models and generate documentation
 dbt compile
 dbt run
 dbt test
+dbt docs generate
+dbt docs serve --host "" --port 8001
 
 # models from specific folders can be run individually
 dbt run --target dev --model src/models/sql_demo1

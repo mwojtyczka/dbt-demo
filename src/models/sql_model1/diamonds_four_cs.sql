@@ -9,4 +9,5 @@ select
     cut,
     color,
     clarity
-from {{ source('raw', 'diamonds') }}  -- get table specification from schema.yml
+-- get table specification from schema.yml
+from {{ source('raw', 'diamonds') }} -- equivalent of: from hive_metastore.default.diamonds
