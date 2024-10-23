@@ -5,9 +5,20 @@ dbt_demo:
       schema: dbt_dev
       threads: 8
       type: databricks
+      # DBT_HOST is auto-injected when the project is executed from dbt Databricks job
       host: "{{ env_var('DBT_HOST') }}" # databricks workspace url taken from the environment variables
+
+      # default cluster for executing all models
+      # if you specify SQL Warehouse cluster it can only be used to execute sql models
+      # you need additional configuration to specify cluster for executing python models (all-purpose or job cluster).
       http_path: /sql/1.0/warehouses/475b94ddc7cd5211
-      # you can construct the path but the models execution is very slow using this method:
+
+      # If you specify all-purpose cluster which can be constructed as below if the dbt project is executed from Databricks Job
+      #, the cluster can be used to execute both sql and python models.
+      # However, keep in mind that as of now, all-purpose clusters cannot deploy materialized views
+      # for anything sql it's recommended to use Databricks SQL Warehouses.
       #http_path: "sql/protocolv1/o/{{ env_var('DBT_ORG_ID') }}/{{ env_var('DBT_CLUSTER_ID') }}"
+
+      # DBT_ACCESS_TOKEN is auto-injected when the project is executed from dbt Databricks job
       token: "{{ env_var('DBT_ACCESS_TOKEN') }}" # PAT token taken from environment variables
   target: dev

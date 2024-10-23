@@ -4,12 +4,12 @@ bundle:
   name: dbt_demo
 
 include:
-  - resources/*.yml
+  - resources/*.yml  # include all yml files inside resource/ folder
 
 # https://docs.databricks.com/en/dev-tools/bundles/variables.html
 variables:
   dbt_project_dir:
-    description: project dir to use
+    description: dbt project directory to use
 
 targets:
   # The 'dev' target, for development purposes. This target is the default.

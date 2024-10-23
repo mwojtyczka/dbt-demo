@@ -5,7 +5,7 @@
 name: 'dbt_demo'
 version: '1.0.0'
 
-# This setting configures which "profile" dbt uses for this project.
+# This setting configures which "profile" (within profiles.yml) dbt uses for this project.
 profile: 'dbt_demo'
 
 vars:
@@ -14,14 +14,14 @@ vars:
 # These configurations specify where dbt should look for different types of files.
 # The `model-paths` config, for example, states that models in this project can be
 # found in the "models/" directory. You probably won't need to change these!
-model-paths: ["src/models", "models2"]
+model-paths: ["src/models"]  # list of folder that contain models
 analysis-paths: ["src/analyses"]
 test-paths: ["tests"]
 seed-paths: ["src/seeds"]
 macro-paths: ["src/macros"]
 snapshot-paths: ["src/snapshots"]
 
-clean-targets:         # directories to be removed by `dbt clean`
+clean-targets: # directories to be removed by `dbt clean`
   - "target"
   - "dbt_packages"
 
@@ -32,9 +32,25 @@ clean-targets:         # directories to be removed by `dbt clean`
 # files using the `{{ config(...) }}` macro.
 models:
   dbt_demo:
-    # Config indicated by + and applies to all files under models/example/
-    example:
+    # Config indicated by + and applies to all files under models/sql_model2/
+    sql_model2:
       +materialized: view
+
+    # default cluster to use for running all python models
+    # this can be overwritten by defining this for a specific model within the dbt_project.yml
+    # or by specifying the config inside dedicated .yml file within the models/ directory or within the code.
+    +submission_method: job_cluster
+    +job_cluster_config:
+    # https://docs.databricks.com/api/workspace/jobs/create#job_clusters-new_cluster
+      spark_version: 13.3.x-scala2.12
+      node_type_id: i3.xlarge
+      data_security_mode: SINGLE_USER
+      num_workers: 0
+      spark_conf:
+        spark.master: "local[*, 4]"
+        spark.databricks.cluster.profile: singleNode
+      custom_tags:
+        ResourceClass: SingleNode
 
 # extension for dbt_project_evaluator for evaluating best practices
 # https://github.com/dbt-labs/dbt-project-evaluator

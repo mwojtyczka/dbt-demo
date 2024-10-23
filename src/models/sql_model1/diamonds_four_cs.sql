@@ -9,4 +9,4 @@ select
     cut,
     color,
     clarity
-from {{ source('raw', 'diamonds') }}
+from {{ source('raw', 'diamonds') }}  -- get table specification from schema.yml
