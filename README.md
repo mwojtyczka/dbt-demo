@@ -27,6 +27,10 @@ dbt test
 dbt docs generate
 dbt docs serve --host "" --port 8001
 
+# run only unit tests
+# https://docs.getdbt.com/docs/build/unit-tests
+dbt test --select "test_type:unit"
+
 # models from specific folders can be run individually
 dbt run --target dev --model src/models/sql_demo1
 
@@ -87,3 +91,7 @@ There are 2 types of clusters used in Databricks dbt jobs:
 * How to setup dbt job in Databricks: https://docs.databricks.com/en/jobs/how-to/use-dbt-in-workflows.html
 * Example assets bundle project for dbt: https://github.com/databricks/bundle-examples/tree/main/dbt_sql
 * Tutorial on executing dbt using Databricks job: https://docs.databricks.com/en/jobs/how-to/use-dbt-in-workflows.html
+* Tests in dbt:
+  * Model Contracts: https://docs.getdbt.com/docs/collaborate/govern/model-contracts
+  * Data Tests: https://docs.getdbt.com/docs/build/data-tests
+  * Unit Tests: https://docs.getdbt.com/docs/build/unit-tests
