@@ -1,0 +1,15 @@
+unit_tests:
+  - name: test_get_distinct_colors
+    description: "Check a distinct list of colors is returned."
+    model: diamonds_list_colors
+    given:
+      - input: ref('diamonds_four_cs')
+        rows:
+          - {carat: 0.23,    cut: Ideal, color: E, clarity: SI2}
+          - {carat: 0.30,    cut: Premium, color: E, clarity: SI2}
+          - {carat: 0.30,    cut: Premium, color: K, clarity: SI2}
+    expect:
+      format: dict
+      rows:
+        - {color: E}
+        - {color: K}
