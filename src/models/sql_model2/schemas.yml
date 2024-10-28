@@ -1,21 +1,34 @@
-
+# https://docs.getdbt.com/docs/collaborate/govern/model-contracts
 version: 2
 
 models:
   - name: first_dbt_model
+    config:
+      contract:
+        enforced: true
     description: "A starter dbt model"
     columns:
       - name: id
+        data_type: int
         description: "The primary key for this table"
         data_tests:
           - unique
           - not_null
 
   - name: second_dbt_model
+    config:
+      contract:
+        enforced: true
     description: "A starter dbt model"
     columns:
       - name: id
+        data_type: int
         description: "The primary key for this table"
         data_tests:
           - unique
+          - not_null
+      - name: amount_usd
+        data_type: decimal
+        description: "The primary key for this table"
+        data_tests:
           - not_null
