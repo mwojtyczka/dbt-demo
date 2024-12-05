@@ -54,10 +54,3 @@ models:
         spark.databricks.cluster.profile: singleNode
       custom_tags:
         ResourceClass: SingleNode
-
-# extension for dbt_project_evaluator for evaluating best practices
-# https://github.com/dbt-labs/dbt-project-evaluator
-# run: dbt build --select package:dbt_project_evaluator
-dispatch:
-  - macro_namespace: dbt_utils
-    search_order: ['dbt_project_evaluator', 'spark_utils', 'dbt_utils']

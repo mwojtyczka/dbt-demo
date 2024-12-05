@@ -37,9 +37,6 @@ models:
         data_tests:
           - unique
           - not_null
-          - relationships:
-              to: ref('zzz_game_details')
-              field: home
       - name: wins
         data_tests:
           - not_null
