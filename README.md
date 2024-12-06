@@ -22,6 +22,8 @@ export DBT_HOST=<workspace_url>
 
 # compile, run, test all models and generate documentation
 dbt compile
+dbt seed
+dbt snapshot
 dbt run
 dbt test
 dbt docs generate
