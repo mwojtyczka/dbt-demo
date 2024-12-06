@@ -2,19 +2,8 @@ resources:
   jobs:
     dbt_sql_job:
       name: dbt_sql_job
-
-      #schedule:
-      #  # Run every day at 9:27 AM
-      #  quartz_cron_expression: 21 27 9 * * ?
-      #  timezone_id: UTC
-
-      #email_notifications:
-      #  on_failure:
-      #    - user@company.com
-
       tasks:
         - task_key: dbt
-
           dbt_task:
             project_directory: ${var.dbt_project_dir} # cannot use relative path ../
             # The default schema, catalog, etc. are defined in ./profiles.yml
@@ -25,18 +14,10 @@ resources:
             - 'dbt seed --target=${bundle.target}'
             - 'dbt run --target=${bundle.target}'
             - 'dbt test --target=${bundle.target}'
-
-          libraries:
-          - pypi:
-              package: dbt-databricks>=1.0.0,<2.0.0
-
-          new_cluster:
-            spark_version: 13.3.x-scala2.12
-            node_type_id: i3.xlarge
-            data_security_mode: SINGLE_USER
-            num_workers: 0
-            spark_conf:
-                spark.master: "local[*, 4]"
-                spark.databricks.cluster.profile: singleNode
-            custom_tags:
-              ResourceClass: SingleNode
+          environment_key: Default
+      environments:
+        - environment_key: Default
+          spec:
+            client: "1"
+            dependencies:
+              - dbt-databricks
