@@ -1,3 +1,0 @@
-[sqlfluff]
-templater = dbt
-dialect = sparksql

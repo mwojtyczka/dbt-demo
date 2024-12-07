@@ -10,10 +10,10 @@ resources:
             profiles_directory: .
             commands:
             # The dbt commands to run (see also dbt_profiles/profiles.yml; dbt_dev schema is used in the dev profile)
-            - 'dbt deps --target=${bundle.target}'
-            - 'dbt seed --target=${bundle.target}'
-            - 'dbt run --target=${bundle.target}'
-            - 'dbt test --target=${bundle.target}'
+            - 'dbt deps --target ${bundle.target}'
+            - 'dbt seed --target ${bundle.target}'
+            - 'dbt run --target ${bundle.target}'
+            - 'dbt test --target ${bundle.target}'
           environment_key: Default
       environments:
         - environment_key: Default

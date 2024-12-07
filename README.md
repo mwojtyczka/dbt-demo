@@ -51,18 +51,17 @@ dbt deps
 dbt build --select package:dbt_project_evaluator
 ```
 
-## Standardize SQL
+## (Optional) Create spearate tasks for each dbt model
 
-Run [SQL linter and formatter](https://sqlfluff.com/):
-```bash
-# execute linter
-sqlfluff lint src/models/*/*.sql
-
-# fix the issue
-sqlfluff fix src/models/*/*.sql
+Install the library:
+```shell
+pip install databricks-dbt-factory
 ```
 
-More on dbt project best practices on Databricks here: https://www.databricks.com/blog/2022/12/15/best-practices-super-powering-your-dbt-project-databricks.html
+Update tasks in the job definition [resources/dbt_sql_job.yml](resources/dbt_sql_job.yml):
+```shell
+databricks_dbt_factory --dbt-manifest-path target/manifest.json --input-job-spec-path resources/dbt_sql_job.yml --target-job-spec-path resources/dbt_sql_job_explicit_tasks.yml --target '${bundle.target}' --project-directory ../ --profiles-directory . --environment-key Default --new-job-name dbt_sql_job_explicit_tasks
+```
 
 ## Deploy dbt project as Databricks Job using Databricks Assets Bundle (DAB)
 
