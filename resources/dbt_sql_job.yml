@@ -5,7 +5,7 @@ resources:
       tasks:
         - task_key: dbt
           dbt_task:
-            project_directory: ${var.dbt_project_dir} # cannot use relative path ../
+            project_directory: ../
             # The default schema, catalog, etc. are defined in ./profiles.yml
             profiles_directory: .
             commands:

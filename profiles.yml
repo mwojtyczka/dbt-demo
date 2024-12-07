@@ -1,10 +1,11 @@
 dbt_demo:
+  target: dev # default target
   outputs:
     dev:
+      type: databricks
       catalog: dbt_demo
       schema: dbt_dev
       threads: 8
-      type: databricks
       # DBT_HOST is auto-injected when the project is executed from dbt Databricks job
       host: "{{ env_var('DBT_HOST') }}" # databricks workspace url taken from the environment variables
 
@@ -21,4 +22,3 @@ dbt_demo:
 
       # DBT_ACCESS_TOKEN is auto-injected when the project is executed from dbt Databricks job
       token: "{{ env_var('DBT_ACCESS_TOKEN') }}" # PAT token taken from environment variables
-  target: dev

@@ -4,12 +4,7 @@ bundle:
   name: dbt_demo
 
 include:
-  - resources/*.yml  # include all yml files inside resource/ folder
-
-# https://docs.databricks.com/en/dev-tools/bundles/variables.html
-variables:
-  dbt_project_dir:
-    description: dbt project directory to use
+  - resources/dbt_sql_job.yml
 
 targets:
   # The 'dev' target, for development purposes. This target is the default.
@@ -22,8 +17,6 @@ targets:
     default: true
     workspace:
       host: https://e2-demo-field-eng.cloud.databricks.com/
-    variables:
-      dbt_project_dir: /Users/marcin.wojtyczka@databricks.com/.bundle/dbt_demo/dev/files
 
   # The 'prod' target, used for production deployment.
   prod:
@@ -39,5 +32,3 @@ targets:
     run_as:
       user_name: user@mail.com
       #service_principal_name: "69511ed2-zb27-444c-9863-4bc8ff497637"
-    variables:
-      dbt_project_dir: /Shared/.bundle/prod/${bundle.name}/dbt_demo/dev/files
