@@ -51,7 +51,11 @@ dbt deps
 dbt build --select package:dbt_project_evaluator
 ```
 
-## (Optional) Create spearate tasks for each dbt model
+## (Optional) Create separate tasks for each dbt model
+
+By default, Databricks Workflows will run all dbt objects (seeds/snapshots/models/tests) in a single task.
+
+To run each dbt object in a separate task, you can use the `databricks-dbt-factory` tool.
 
 Install the library:
 ```shell
@@ -62,6 +66,9 @@ Update tasks in the job definition [resources/dbt_sql_job.yml](resources/dbt_sql
 ```shell
 databricks_dbt_factory --dbt-manifest-path target/manifest.json --input-job-spec-path resources/dbt_sql_job.yml --target-job-spec-path resources/dbt_sql_job_explicit_tasks.yml --target '${bundle.target}' --project-directory ../ --profiles-directory . --environment-key Default --new-job-name dbt_sql_job_explicit_tasks
 ```
+
+This will produce the following workflow:
+![workflow](docs/workflow.png?)
 
 ## Deploy dbt project as Databricks Job using Databricks Assets Bundle (DAB)
 
