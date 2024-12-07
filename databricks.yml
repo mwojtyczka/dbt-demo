@@ -4,7 +4,7 @@ bundle:
   name: dbt_demo
 
 include:
-  - resources/dbt_sql_job.yml
+  - resources/*.yml
 
 targets:
   # The 'dev' target, for development purposes. This target is the default.
