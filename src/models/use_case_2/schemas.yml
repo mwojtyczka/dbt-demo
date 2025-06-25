@@ -11,10 +11,11 @@ models:
       - name: id
         data_type: int
         description: "The primary key for this table"
-        tests:
+        data_tests:
           - unique
           - not_null
-
+          - not_less_than:
+              min_value: 5
   - name: second_dbt_model
     config:
       contract:
@@ -24,7 +25,7 @@ models:
       - name: id
         data_type: int
         description: "The primary key for this table"
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: amount_usd

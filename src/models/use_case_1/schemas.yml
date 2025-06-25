@@ -4,47 +4,58 @@ models:
   - name: game_details
     columns:
       - name: game_id
-        tests:
+        data_tests:
           - unique
           - not_null
+          - not_less_than:
+              severity: warn # or error
+              #error_if: "> 6"
+              #warn_if: "> 1"
+              min_value: 10
+              limit: 1000  # limit number of error reported, will only include the first 1000 failures
+              store_failures: true  # always store failures
       - name: home
-        tests:
+        data_tests:
           - not_null
-          - accepted_values:
-              values: ['Amsterdam', 'San Francisco', 'Seattle']
+              # can optionally filter
+              #where: "visitor = \"Amsterdam\""
+          - relationships:
+              to: ref('team_cities')
+              field: team_city
       - name: visitor
-        tests:
+        data_tests:
           - not_null
           - accepted_values:
               values: ['Amsterdam', 'San Francisco', 'Seattle']
       - name: home_score
-        tests:
+        data_tests:
           - not_null
       - name: visitor_score
-        tests:
+        data_tests:
           - not_null
       - name: winner
-        tests:
+        data_tests:
           - not_null
-          - accepted_values:
-              values: ['Amsterdam', 'San Francisco', 'Seattle']
+          - relationships:
+              to: ref('team_cities')
+              field: team_city
       - name: date
-        tests:
+        data_tests:
           - not_null
       - name: game_id
-        tests:
+        data_tests:
           - relationships:
               to: ref('games')
               field: game_id
   - name: win_loss_records
     columns:
       - name: team
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: wins
-        tests:
+        data_tests:
           - not_null
       - name: losses
-        tests:
+        data_tests:
           - not_null

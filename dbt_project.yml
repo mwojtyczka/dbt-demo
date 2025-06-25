@@ -31,3 +31,11 @@ models:
     # Config indicated by + and applies to all files under models/use_case_3/
     use_case_3:
       +materialized: view
+
+tests:
+  dbt_demo:
+    # https://docs.getdbt.com/reference/resource-configs/store_failures_as
+    +store_failures_as: ephemeral # table
+    # https://docs.getdbt.com/reference/resource-configs/schema#tests
+    +schema: quality_checks  # customize where test results should be stored (original_schema + quality_checks)
+    +severity: warn # or error

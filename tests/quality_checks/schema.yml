@@ -1,0 +1,6 @@
+version: 2
+data_tests:
+  # provide description for the tests
+  - name: game_details_check_scores
+    description: >
+      Verifies that home and visitor scores are not the same and are not less than 0

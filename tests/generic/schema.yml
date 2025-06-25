@@ -1,0 +1,31 @@
+macros:
+  - name: test_not_less_than
+    description: value should not be less than the provided limit
+    arguments:
+      - name: model
+        type: string
+        description: Model Name
+      - name: column_name
+        type: string
+        description: Column name for the check
+      - name: min_value
+        type: int
+        description: limit to check against
+  - name: test_not_null
+    description: value should not be null
+    arguments:
+      - name: model
+        type: string
+        description: Model Name
+      - name: column_name
+        type: string
+        description: Column name for the check
+  - name: test_unique
+    description: Column should not have duplicates
+    arguments:
+      - name: model
+        type: string
+        description: Model Name
+      - name: column_name
+        type: string
+        description: Column name for the check
