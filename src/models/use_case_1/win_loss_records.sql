@@ -17,7 +17,7 @@ from (
             else
                 home
         end as loser
-    from {{ ref('zzz_game_details') }}
+    from {{ ref('game_details') }}
 )
 group by winner
 order by wins desc

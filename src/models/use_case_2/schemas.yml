@@ -11,7 +11,7 @@ models:
       - name: id
         data_type: int
         description: "The primary key for this table"
-        data_tests:
+        tests:
           - unique
           - not_null
 
@@ -24,11 +24,11 @@ models:
       - name: id
         data_type: int
         description: "The primary key for this table"
-        data_tests:
+        tests:
           - unique
           - not_null
       - name: amount_usd
         data_type: decimal
         description: "The primary key for this table"
-        data_tests:
+        tests:
           - not_null

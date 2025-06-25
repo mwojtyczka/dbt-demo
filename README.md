@@ -49,7 +49,7 @@ dbt test --select "test_type:unit"
 dbt run --target dev --model src/models/sql_demo1
 
 # run individual models
-dbt run --target dev --model --models zzz_game_details zzz_win_loss_records
+dbt run --target dev --model --models game_details win_loss_records
 ```
 
 ## Ensure project best practices
