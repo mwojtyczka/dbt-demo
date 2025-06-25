@@ -21,12 +21,24 @@ export DBT_CLUSTER_ID=<cluster_id>
 export DBT_HOST=<workspace_url>
 
 # compile, run, test all models and generate documentation
+# see: https://docs.getdbt.com/reference/dbt-commands
+
+# Compiles (but does not run) the models in a project
 dbt compile
+
+# Loads CSV files into the database
 dbt seed
-dbt snapshot
+
+# Runs the models in a project
 dbt run
+
+# Runs the tests defined in a project
 dbt test
+
+# Generates documentation for a project
 dbt docs generate
+
+# Serves the documentation for a project
 dbt docs serve --host "" --port 8001
 
 # run only unit tests

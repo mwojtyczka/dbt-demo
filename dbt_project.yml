@@ -28,6 +28,6 @@ clean-targets: # directories to be removed by `dbt clean`
 # Configuring models: https://docs.getdbt.com/docs/configuring-models
 models:
   dbt_demo:
-    # Config indicated by + and applies to all files under models/example/
-    example:
+    # Config indicated by + and applies to all files under models/use_case_3/
+    use_case_3:
       +materialized: view

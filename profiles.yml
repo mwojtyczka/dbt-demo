@@ -12,7 +12,7 @@ dbt_demo:
       # default cluster for executing all models
       # if you specify SQL Warehouse cluster it can only be used to execute sql models
       # you need additional configuration to specify cluster for executing python models (all-purpose or job cluster).
-      http_path: /sql/1.0/warehouses/475b94ddc7cd5211
+      http_path: /sql/1.0/warehouses/4b9b953939869799
 
       # If you specify all-purpose cluster which can be constructed as below if the dbt project is executed from Databricks Job
       #, the cluster can be used to execute both sql and python models.

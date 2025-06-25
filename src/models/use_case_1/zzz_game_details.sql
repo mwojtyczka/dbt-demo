@@ -43,18 +43,18 @@ from (
             gs.visitor_team_score as visitor_score,
             g.game_date
         from
-            marcin_demo.dbt.{{ target.name }}_zzz_games as g,
-            marcin_demo.dbt.zzz_game_opponents as go,
-            marcin_demo.dbt.zzz_game_scores as gs
+            {{ target.catalog }}.{{ target.schema }}.{{ target.name }}_zzz_games as g,
+            {{ target.catalog }}.{{ target.schema }}.zzz_game_opponents as go,
+            {{ target.catalog }}.{{ target.schema }}.zzz_game_scores as gs
         where
             g.game_id = go.game_id
             and g.game_id = gs.game_id
     ) as all_ids,
-        marcin_demo.dbt.zzz_teams as t
+        {{ target.catalog }}.{{ target.schema }}.zzz_teams as t
     where
         all_ids.home_team_id = t.team_id
 ) as visitor_ids,
-    marcin_demo.dbt.zzz_teams as t
+    {{ target.catalog }}.{{ target.schema }}.zzz_teams as t
 where
     visitor_ids.visitor_team_id = t.team_id
 order by game_date desc
