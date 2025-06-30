@@ -1,8 +1,8 @@
 -- run this before running dbt models
-CREATE CATALOG dbt_demo;
+CREATE CATALOG IF NOT EXISTS dbt_demo;
 
 --DROP SCHEMA IF EXISTS dbt_demo.dbt_dev CASCADE;
-CREATE SCHEMA dbt_demo.dbt_dev;
+CREATE SCHEMA IF NOT EXISTS dbt_demo.dbt_dev;
 
 DROP TABLE hive_metastore.default.diamonds;
 CREATE TABLE hive_metastore.default.diamonds USING CSV OPTIONS (path "/databricks-datasets/Rdatasets/data-001/csv/ggplot2/diamonds.csv", header "true");
