@@ -32,7 +32,9 @@ models:
           - not_null
       - name: visitor_score
         data_tests:
-          - not_null
+          - not_null:
+              config:
+                severity: error
       - name: winner
         data_tests:
           - not_null

@@ -27,7 +27,9 @@ models:
         description: "The primary key for this table"
         data_tests:
           - unique
-          - not_null
+          - not_null:
+              config:
+                severity: error
       - name: amount_usd
         data_type: decimal
         description: "The primary key for this table"

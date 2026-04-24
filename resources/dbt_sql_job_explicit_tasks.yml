@@ -1,0 +1,370 @@
+resources:
+  jobs:
+    dbt_sql_job_explicit_tasks:
+      name: dbt_sql_job_explicit_tasks
+      tasks:
+      - task_key: model_dbt_demo_diamonds_list_colors
+        depends_on:
+        - task_key: model_dbt_demo_diamonds_four_cs
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt run --select diamonds_list_colors --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: model_dbt_demo_win_loss_records
+        depends_on:
+        - task_key: model_dbt_demo_game_details
+        - task_key: test_dbt_demo_not_null_game_details_visitor_score_00ac20a830
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt run --select win_loss_records --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: model_dbt_demo_diamonds_prices
+        depends_on: []
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt run --select diamonds_prices --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: model_dbt_demo_teams
+        depends_on:
+        - task_key: seed_dbt_demo_team_cities
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt run --select teams --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: model_dbt_demo_country
+        depends_on:
+        - task_key: seed_dbt_demo_country_codes
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt run --select country --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: model_dbt_demo_games
+        depends_on:
+        - task_key: seed_dbt_demo_game_dates
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt run --select games --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: model_dbt_demo_diamonds_four_cs
+        depends_on: []
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt run --select diamonds_four_cs --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: model_dbt_demo_game_details
+        depends_on:
+        - task_key: model_dbt_demo_games
+        - task_key: model_dbt_demo_teams
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt run --select game_details --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: model_dbt_demo_latest_game
+        depends_on:
+        - task_key: model_dbt_demo_games
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt run --select latest_game --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: model_dbt_demo_second_dbt_model
+        depends_on:
+        - task_key: model_dbt_demo_first_dbt_model
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt run --select second_dbt_model --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: model_dbt_demo_first_dbt_model
+        depends_on: []
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt run --select first_dbt_model --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: test_dbt_demo_game_details_check_scores
+        depends_on:
+        - task_key: model_dbt_demo_game_details
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt test --select game_details_check_scores --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: test_dbt_demo_game_details_check_dates
+        depends_on:
+        - task_key: model_dbt_demo_game_details
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt test --select game_details_check_dates --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: test_dbt_demo_win_loss_records_check_records
+        depends_on:
+        - task_key: model_dbt_demo_win_loss_records
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt test --select win_loss_records_check_records --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: seed_dbt_demo_game_dates
+        depends_on: []
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt seed --select game_dates --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: seed_dbt_demo_team_cities
+        depends_on: []
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt seed --select team_cities --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: seed_dbt_demo_country_codes
+        depends_on: []
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt seed --select country_codes --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: test_dbt_demo_unique_game_details_game_id_9ac47f09bd
+        depends_on:
+        - task_key: model_dbt_demo_game_details
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt test --select unique_game_details_game_id --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: test_dbt_demo_not_null_game_details_game_id_305c605838
+        depends_on:
+        - task_key: model_dbt_demo_game_details
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt test --select not_null_game_details_game_id --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: test_dbt_demo_not_less_than_game_details_game_id__10_dd7e34bc1f
+        depends_on:
+        - task_key: model_dbt_demo_game_details
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt test --select not_less_than_game_details_game_id__10 --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: test_dbt_demo_not_null_game_details_home_31b8e4e0f4
+        depends_on:
+        - task_key: model_dbt_demo_game_details
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt test --select not_null_game_details_home --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: test_dbt_demo_relationships_game_details_home__team_city__ref_team_cities__9b289a4840
+        depends_on:
+        - task_key: seed_dbt_demo_team_cities
+        - task_key: model_dbt_demo_game_details
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt test --select relationships_game_details_home__team_city__ref_team_cities_ --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: test_dbt_demo_not_null_game_details_visitor_196608e29f
+        depends_on:
+        - task_key: model_dbt_demo_game_details
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt test --select not_null_game_details_visitor --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: test_dbt_demo_accepted_values_game_details_visitor__Amsterdam__San_Francisco__Seattle_f447b23755
+        depends_on:
+        - task_key: model_dbt_demo_game_details
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt test --select accepted_values_game_details_visitor__Amsterdam__San_Francisco__Seattle --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: test_dbt_demo_not_null_game_details_home_score_af971fbc9d
+        depends_on:
+        - task_key: model_dbt_demo_game_details
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt test --select not_null_game_details_home_score --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: test_dbt_demo_not_null_game_details_visitor_score_00ac20a830
+        depends_on:
+        - task_key: model_dbt_demo_game_details
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt test --select not_null_game_details_visitor_score --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: test_dbt_demo_not_null_game_details_winner_9d76aaeabb
+        depends_on:
+        - task_key: model_dbt_demo_game_details
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt test --select not_null_game_details_winner --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: test_dbt_demo_relationships_game_details_winner__team_city__ref_team_cities__c504c71544
+        depends_on:
+        - task_key: seed_dbt_demo_team_cities
+        - task_key: model_dbt_demo_game_details
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt test --select relationships_game_details_winner__team_city__ref_team_cities_ --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: test_dbt_demo_not_null_game_details_date_55c512c662
+        depends_on:
+        - task_key: model_dbt_demo_game_details
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt test --select not_null_game_details_date --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: test_dbt_demo_relationships_game_details_game_id__game_id__ref_games__75fdc0a0c1
+        depends_on:
+        - task_key: model_dbt_demo_games
+        - task_key: model_dbt_demo_game_details
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt test --select relationships_game_details_game_id__game_id__ref_games_ --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: test_dbt_demo_unique_win_loss_records_team_eae0c4ed93
+        depends_on:
+        - task_key: model_dbt_demo_win_loss_records
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt test --select unique_win_loss_records_team --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: test_dbt_demo_not_null_win_loss_records_team_aee8b844a3
+        depends_on:
+        - task_key: model_dbt_demo_win_loss_records
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt test --select not_null_win_loss_records_team --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: test_dbt_demo_not_null_win_loss_records_wins_0a06f09012
+        depends_on:
+        - task_key: model_dbt_demo_win_loss_records
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt test --select not_null_win_loss_records_wins --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: test_dbt_demo_not_null_win_loss_records_losses_d3113a75b9
+        depends_on:
+        - task_key: model_dbt_demo_win_loss_records
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt test --select not_null_win_loss_records_losses --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: test_dbt_demo_unique_first_dbt_model_id_9dda05743e
+        depends_on:
+        - task_key: model_dbt_demo_first_dbt_model
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt test --select unique_first_dbt_model_id --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: test_dbt_demo_not_null_first_dbt_model_id_bd8d25d061
+        depends_on:
+        - task_key: model_dbt_demo_first_dbt_model
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt test --select not_null_first_dbt_model_id --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: test_dbt_demo_not_less_than_first_dbt_model_id__5_1b80ea3210
+        depends_on:
+        - task_key: model_dbt_demo_first_dbt_model
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt test --select not_less_than_first_dbt_model_id__5 --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: test_dbt_demo_unique_second_dbt_model_id_3d7f6966a4
+        depends_on:
+        - task_key: model_dbt_demo_second_dbt_model
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt test --select unique_second_dbt_model_id --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: test_dbt_demo_not_null_second_dbt_model_id_c791c712a2
+        depends_on:
+        - task_key: model_dbt_demo_second_dbt_model
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt test --select not_null_second_dbt_model_id --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      - task_key: test_dbt_demo_not_null_second_dbt_model_amount_usd_28ae55e16f
+        depends_on:
+        - task_key: model_dbt_demo_second_dbt_model
+        environment_key: Default
+        dbt_task:
+          commands:
+          - dbt test --select not_null_second_dbt_model_amount_usd --target ${bundle.target}
+          project_directory: ../
+          profiles_directory: .
+      environments:
+      - environment_key: Default
+        spec:
+          client: '1'
+          dependencies:
+          - dbt-databricks
