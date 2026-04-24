@@ -1,5 +1,46 @@
 Welcome to my dbt demo project!
 
+## Install dbt
+
+Install the Databricks dbt adapter (pulls in `dbt-core` as a dependency) into a fresh virtual environment:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements-dev.txt
+```
+
+Verify the install:
+
+```bash
+dbt --version
+```
+
+## Install the Databricks CLI
+
+The Databricks CLI is required to deploy this project as a job via Databricks Asset Bundles (DAB).
+
+macOS / Linux (Homebrew):
+
+```bash
+brew tap databricks/tap
+brew install databricks
+```
+
+Or with the install script (any OS with `curl`):
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/databricks/setup-cli/main/install.sh | sh
+```
+
+Verify the install:
+
+```bash
+databricks --version
+```
+
+Other installation methods are documented [here](https://docs.databricks.com/en/dev-tools/cli/install.html).
+
 ## Initiate dbt run from a local machine
 
 Execute [resources/input_data.sql](resources/input_data.sql) script first in Databricks to setup input tables.
